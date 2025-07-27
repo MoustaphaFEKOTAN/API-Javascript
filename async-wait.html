@@ -1,0 +1,21 @@
+<script>
+
+async function envoyerPost() {
+  try {
+    const response = await fetch('https://api.example.com/posts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ titre: 'Exemple' })
+    });
+
+    if (!response.ok) throw new Error('Erreur API');
+
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('Erreur attrapée :', error);
+  }
+}
+</script>

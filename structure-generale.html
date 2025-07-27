@@ -1,0 +1,15 @@
+<script>fetch('https://api.example.com/posts', {
+  method: 'POST', // ou GET, PUT, DELETE
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer TOKEN' // si besoin
+  },
+  body: JSON.stringify({ title: 'Nouveau post' }) // sauf pour GET
+})
+  .then(response => {
+    if (!response.ok) throw new Error('Erreur de requête');
+    return response.json(); // ou response.text()
+  })
+  .then(data => console.log(data))
+  .catch(error => console.error('Erreur :', error));
+</script>
