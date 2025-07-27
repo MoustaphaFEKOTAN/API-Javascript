@@ -1,0 +1,56 @@
+<!-- Envoi de données -->
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulaire POST</title>
+</head>
+<body>
+
+  <h2>Créer un article</h2>
+
+  <form id="formulaire">
+    <input type="text" id="titre" placeholder="Titre"><br><br>
+    <textarea id="contenu" placeholder="Contenu"></textarea><br><br>
+    <button type="submit">Envoyer</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('formulaire');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Empêche le rechargement de la page
+
+      const titre = document.getElementById('titre').value;
+      const contenu = document.getElementById('contenu').value;
+
+      fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          title: titre,
+          body: contenu,
+          userId: 1
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Réponse de l’API :', data);
+        alert('Article envoyé avec succès !');
+      })
+      .catch(error => {
+        console.error('Erreur lors de l’envoi :', error);
+      });
+    });
+  </script>
+
+</body>
+</html>
+
+
+
+
+

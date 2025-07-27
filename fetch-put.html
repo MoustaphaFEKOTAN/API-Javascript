@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mettre à jour un article</title>
+</head>
+<body>
+
+  <h2>Modifier un post</h2>
+
+  <input type="text" id="titre" placeholder="Nouveau titre"><br>
+  <textarea id="contenu" placeholder="Nouveau contenu"></textarea><br>
+  <button id="mettreAJour">Mettre à jour</button>
+
+  <script>
+    const btn = document.getElementById('mettreAJour');
+
+    btn.addEventListener('click', () => {
+      const titre = document.getElementById('titre').value;
+      const contenu = document.getElementById('contenu').value;
+
+      fetch('https://jsonplaceholder.typicode.com/posts/1', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          title: titre,
+          body: contenu,
+          userId: 1
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Post mis à jour :', data);
+        alert("Mise à jour réussie !");
+      })
+      .catch(error => {
+        console.error('Erreur :', error);
+      });
+    });
+  </script>
+
+</body>
+</html>
